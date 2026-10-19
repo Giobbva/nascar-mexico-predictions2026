@@ -1,58 +1,58 @@
 <p align="center">
-  <img src="assets/gpyucatan200_logo.png" width="350" alt="Logo Gran Premio Yucatán 200">
+  <img src="assets/gpyucatan200_logo.png" width="350" alt="Gran Premio Yucatán 200 Logo">
 </p>
 
-# 🏎️🏁 NASCAR México Series Predictor
+# 🏎️🏁 NASCAR Mexico Series Predictor
 
-Un pipeline de Machine Learning en Python desarrollado para predecir el orden de llegada de la parrilla completa (20 autos) en el **Gran Premio Yucatán 200** de NASCAR México Series, disputado en el Autódromo Emerson Fittipaldi (Mérida, Yucatán).
+A Python-based Machine Learning pipeline developed to predict the finishing order of the full grid (20 cars) in the **Gran Premio Yucatán 200** of the NASCAR Mexico Series, held at the Autódromo Emerson Fittipaldi (Mérida, Yucatán).
 
-## 📸 Acción en Pista (17 de Octubre, 2026)
-*Documentación visual directa desde el Autódromo Emerson Fittipaldi durante el fin de semana de carrera.*
+## 📸 On-Track Action (October 17, 2026)
+*Direct visual documentation from the Autódromo Emerson Fittipaldi during the race weekend.*
 
 <p align="center">
-  <img src="assets/carrera.jpeg" width="750" alt="Autos en pista - Autódromo Emerson Fittipaldi">
+  <img src="assets/carrera.jpeg" width="750" alt="Cars on track - Autódromo Emerson Fittipaldi">
 </p>
 
-## 🚀 Arquitectura del Proyecto
+## 🚀 Project Architecture
 
-Este modelo no utiliza datos simulados; se alimenta de información real y verificable del campeonato:
+This model does not use simulated data; it is fed by real, verifiable championship information:
 
-* **Ingesta en Vivo (Race.mx):** Conexión a la API oficial de datos abiertos para extraer los *Standings* del Chase en tiempo real y la parrilla titular.
-* **Clima Dinámico (OpenWeatherMap):** Integración de telemetría meteorológica (temperatura y probabilidad de lluvia) de Mérida para calcular un índice personalizado de `HeatTrafficStress`.
-* **Feature Engineering:** 
-  * `ChaseMomentum`: Rastrea la trayectoria de rendimiento del piloto comparando su semilla inicial de Playoffs con su ranking actual.
-  * `TargetDominanceScore`: Variable objetivo compuesta que pondera el desempeño en campeonato regular vs. Playoffs.
-* **Modelo Predictivo:** Implementación de `XGBRegressor` con **Restricciones Monotónicas** (para forzar coherencia deportiva en el árbol de decisión) y **Validación Cruzada Leave-One-Out (LOOCV)** con predicciones *Out-Of-Fold* para eliminar por completo el *overfitting* en la parrilla.
+- **Live Data Ingestion (Race.mx):** Connection to the official open data API to extract real-time Chase *Standings* and the starting grid.
+- **Dynamic Weather (OpenWeatherMap):** Integration of meteorological telemetry (temperature and rain probability) from Mérida to calculate a custom `HeatTrafficStress` index.
+- **Feature Engineering:** 
+  - `ChaseMomentum`: Tracks a driver's performance trajectory by comparing their initial Playoff seed with their current ranking.
+  - `TargetDominanceScore`: A composite target variable that weighs regular season vs. Playoff performance.
+- **Predictive Model:** Implementation of `XGBRegressor` with **Monotonic Constraints** (to enforce sports logic in the decision tree) and **Leave-One-Out Cross-Validation (LOOCV)** with *Out-Of-Fold* predictions to completely eliminate grid *overfitting*.
 
-## 🛠️ Tecnologías Utilizadas
+## 🛠️ Technologies Used
 
-* **Lenguaje:** Python 3.12
-* **Machine Learning:** XGBoost, Scikit-Learn
-* **Data Wrangling:** Pandas, NumPy
-* **APIs:** Requests, JSON
+- **Language:** Python 3.12
+- **Machine Learning:** XGBoost, Scikit-Learn
+- **Data Wrangling:** Pandas, NumPy
+- **APIs:** Requests, JSON
 
-## ⚙️ Instalación y Uso
+## ⚙️ Installation and Usage
 
-1. Clona el repositorio e instala las dependencias:
+1. Clone the repository and install the dependencies:
 ```bash
-git clone https://github.com/TU_USUARIO/nascar-mexico-predictions2026.git
+git clone [https://github.com/YOUR_USERNAME/nascar-mexico-predictions2026.git](https://github.com/YOUR_USERNAME/nascar-mexico-predictions2026.git)
 cd nascar-mexico-predictions2026
 python -m venv .venv
-source .venv/bin/activate  # En Windows: .venv\Scripts\activate
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-2. Configura tus llaves de API creando un archivo `.env` en la raíz del proyecto:
+2. Configure your API keys by creating a `.env` file in the project root:
 ```env
-OPENWEATHERMAP_API_KEY=tu_api_key_aqui
+OPENWEATHERMAP_API_KEY=your_api_key_here
 ```
 
-3. Ejecuta el pipeline completo desde el Jupyter Notebook:
+3. Run the complete pipeline from the Jupyter Notebook:
 ```bash
 jupyter notebook notebook/main.ipynb
 ```
 
-## 📝 Licencias
+## 📝 Licenses
 
-* **Código:** Este proyecto se distribuye bajo la [Licencia MIT](LICENSE). Eres libre de utilizar y modificar la arquitectura del modelo predictivo.
-* **Datos:** La información de posiciones, pilotos y sedes es extraída de la API abierta de [Race.mx](https://race.mx) y se utiliza bajo la licencia [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+- **Code:** This project is distributed under the [MIT License](LICENSE). You are free to use and modify the predictive model's architecture.
+- **Data:** The standings, drivers, and venue information is extracted from the [Race.mx](https://race.mx) open API and used under the [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) license.
